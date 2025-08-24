@@ -5,11 +5,8 @@ export function start(){
         navigator.mediaDevices.getUserMedia(
             { 
                 video: {
-                    facingMode: {
-                        exact: 'environment'
-                    }
-                },
-                audio: false
+                    facingMode: 'environment'
+                }
             }
         )
         .then(function (stream) {
