@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+
+<html lang="en">
+
+    <head>
+        <meta charset="UTF-8">
+        <meta name="theme-color" content="#75013f">
+        <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+        <link rel="stylesheet" type="text/css" href="static/css/style.css">
+    </head>
+
+    <body>
+        <div class="views">
+            <div id="view_start" class="view view_start">
+                <div class="modal center-screen">
+                    <img id="view_start_logo" class="logo" src="static/img/stag.gif">
+                    <h1>Risk Survey Challenge</h1>
+                    <p id="view_start_tagline">Locate safety technology in the real world using your camera.</p>
+                    <button id="button_start">START</button>
+                </div>
+            </div>
+            <div id="view_loading" class="view view_loading hidden">
+                <div class="modal center-screen">
+                    <h1>Instructions</h1>
+                    <p>Use your camera to find safety technology in the real world.<br><br>Find as many as you can in 30 sec!</p>
+                    <button id="button_loading">Next</button>
+                </div>
+            </div>
+            <div id="view_countdown" class="view view_countdown hidden">
+                <div class="modal center-screen">
+                    <h1 id="view_countdown_value">3</h1>
+                </div>
+            </div>
+            <div id="view_game" class="view view_game hidden">
+                <div id="view_game_toolbar" class="view_game_toolbar_top">
+                    <p class="item">LOCATE</p>
+                    <h1 id="view_game_item" class="item">Traffic Cone</h1>
+                </div>
+                <video id="videoElement" muted autoplay playsinline></video>
+                <div id="view_game_toolbar_bottom" class="modal screen-bottom">
+                    <div>
+                        <h1 id="view_game_timer">30</h1>
+                        <p>TIMER</p>
+                    </div>
+                    <div>
+                        <h1 id="view_game_score">0</h1>
+                        <p>SCORE</p>
+                    </div>
+                </div>
+            </div>
+            <div id="view_found" class="view view_found hidden">
+                <p>Found</p>
+                <button id="button_found">Next</button>
+            </div>
+            <div id="view_finish" class="view view_finish hidden">
+                <div class="modal center-screen">
+                    <h1>Result</h1>
+                    <p>You found 0 types of safety equipment.</p>
+
+                    <div class="grid-container">
+                        <div class="grid-item">
+                            <img src="static/img/test.jpg">
+                            <p>Traffic Cone</p>
+                        </div>                        
+                        <div class="grid-item">
+                            <img src="static/img/test.jpg">
+                            <p>Fire Alarm</p>
+                        </div>
+                        <div class="grid-item">
+                            <img src="static/img/test.jpg">
+                            <p>Fire Extinguisher</p>
+                        </div>
+                    </div>
+
+                    <button id="button_finish">TRY AGAIN?</button>
+                </div>
+
+
+            </div>
+        </div>
+    </body>
+
+</html>
+
+<script src="static/js/main.js" type="module"></script>
