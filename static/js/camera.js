@@ -2,7 +2,16 @@
 export function start(){
     var video = document.querySelector("#videoElement");
     if (navigator.mediaDevices.getUserMedia) {
-        navigator.mediaDevices.getUserMedia({ video: true })
+        navigator.mediaDevices.getUserMedia(
+            { 
+                video: {
+                    facingMode: {
+                        exact: 'environment'
+                    }
+                },
+                audio: false
+            }
+        )
         .then(function (stream) {
             video.srcObject = stream;
             return true
