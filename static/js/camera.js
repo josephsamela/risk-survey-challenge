@@ -1,16 +1,16 @@
+import * as selectors from './selectors.js';
 
 export function start(){
-    var video = document.querySelector("#videoElement");
     if (navigator.mediaDevices.getUserMedia) {
         navigator.mediaDevices.getUserMedia(
-            { 
+            {
                 video: {
-                    facingMode: 'environment'
+                    facingMode: "environment"
                 }
             }
         )
         .then(function (stream) {
-            video.srcObject = stream;
+            selectors.view_game_video.srcObject = stream;
             return true
         })
         .catch(function (error) {
@@ -21,8 +21,7 @@ export function start(){
 }
 
 export function stop(){
-    var video = document.querySelector("#videoElement");
-    video.srcObject.getTracks().forEach(function(track) {
+    selectors.view_game_video.srcObject.getTracks().forEach(function(track) {
         track.stop();
     });
 }

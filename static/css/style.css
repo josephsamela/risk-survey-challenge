@@ -11,7 +11,7 @@
 
 
 .hidden {
-    display: none;
+    display: none !important;
 }
 
 body {
@@ -48,10 +48,10 @@ h1 {
     background-color: #75013f;
 }
 .view_game {
-    background-color: #f5f2ef;
-}
-.view_found {
-    background-color: blue;
+    background-color: #75013f;
+    display: flex;
+    flex-flow: column;
+    height: 100%;
 }
 .view_finish {
     background-color: #75013f;
@@ -104,27 +104,23 @@ button {
     width: 200px;
     mix-blend-mode: lighten;
     filter: invert(1);
-    border-radius: 12px;
+    border-radius: 1em;
 }
 
 video {
     object-fit: cover;
-    width: 100vw;
-    height: 100vh;
-    transform: rotateY(180deg);
+    flex: 1 1 auto;
+    border-radius: 3em;
+    padding: 0.5em;
 }
 
 .view_game_toolbar_top {
-    position: fixed;
     z-index: 1;
     background-color: #75013f;
     width: 100vw;
-    padding-bottom: 5px;
-    /* height: 3em; */
-    /* display: flex; */
+    /* padding-bottom: 5px; */
     align-items: center;
     p {
-        /* float: left; */
         margin: 0px;
         font-size: 1em;
     }
@@ -170,7 +166,7 @@ video {
     text-decoration: none;
 }
 
-.grid-item img {
+.grid-item canvas {
     max-width: 80%;
     height: auto;
     display: block;

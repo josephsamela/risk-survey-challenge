@@ -13,17 +13,17 @@
         <div class="views">
             <div id="view_start" class="view view_start">
                 <div class="modal center-screen">
-                    <img id="view_start_logo" class="logo" src="static/img/stag.gif">
+                    <img id="view_start_logo" class="logo" src="static/img/stag.gif?ignore=1">
                     <h1>Risk Survey Challenge</h1>
                     <p id="view_start_tagline">Locate safety technology in the real world using your camera.</p>
-                    <button id="button_start">START</button>
+                    <button id="view_start_button">START</button>
                 </div>
             </div>
             <div id="view_loading" class="view view_loading hidden">
                 <div class="modal center-screen">
                     <h1>Instructions</h1>
                     <p>Use your camera to find safety technology in the real world.<br><br>Find as many as you can in 30 sec!</p>
-                    <button id="button_loading">Next</button>
+                    <button id="view_loading_button">Next</button>
                 </div>
             </div>
             <div id="view_countdown" class="view view_countdown hidden">
@@ -33,10 +33,10 @@
             </div>
             <div id="view_game" class="view view_game hidden">
                 <div id="view_game_toolbar" class="view_game_toolbar_top">
-                    <p class="item">LOCATE</p>
-                    <h1 id="view_game_item" class="item">Traffic Cone</h1>
+                    <p id="view_game_item_status" class="item">SEARCHING</p>
+                    <h1 id="view_game_item" class="item">...</h1>
                 </div>
-                <video id="videoElement" muted autoplay playsinline></video>
+                <video id="view_game_video" muted autoplay></video>
                 <div id="view_game_toolbar_bottom" class="modal screen-bottom">
                     <div>
                         <h1 id="view_game_timer">30</h1>
@@ -48,34 +48,13 @@
                     </div>
                 </div>
             </div>
-            <div id="view_found" class="view view_found hidden">
-                <p>Found</p>
-                <button id="button_found">Next</button>
-            </div>
             <div id="view_finish" class="view view_finish hidden">
                 <div class="modal center-screen">
                     <h1>Result</h1>
-                    <p>You found 0 types of safety equipment.</p>
-
-                    <div class="grid-container">
-                        <div class="grid-item">
-                            <img src="static/img/test.jpg">
-                            <p>Traffic Cone</p>
-                        </div>                        
-                        <div class="grid-item">
-                            <img src="static/img/test.jpg">
-                            <p>Fire Alarm</p>
-                        </div>
-                        <div class="grid-item">
-                            <img src="static/img/test.jpg">
-                            <p>Fire Extinguisher</p>
-                        </div>
-                    </div>
-
-                    <button id="button_finish">TRY AGAIN?</button>
+                    <p id="view_finish_message">You found 0 types of safety equipment.</p>
+                    <div id="view_finish_gallery" class="grid-container"></div>
+                    <button id="view_finish_button">TRY AGAIN?</button>
                 </div>
-
-
             </div>
         </div>
     </body>
@@ -83,3 +62,9 @@
 </html>
 
 <script src="static/js/main.js" type="module"></script>
+<!-- <script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs@4.22.0"></script> -->
+<!-- <script src="https://cdn.jsdelivr.net/npm/@tensorflow-models/coco-ssd"></script> -->
+
+<script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs@latest/dist/tf.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@teachablemachine/image@latest/dist/teachablemachine-image.min.js"></script>
+ 
