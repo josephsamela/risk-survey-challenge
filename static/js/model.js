@@ -3,8 +3,11 @@ export class Model {
     constructor(source, model_url) {
         this.source = source
 
-        this.modelURL = model_url + "model.json";
-        this.metadataURL = model_url + "metadata.json";
+        this.modelURL = 'static/model/model.json'
+        this.metadataURL = 'static/model/metadata.json'
+
+        // this.modelURL = model_url + "model.json";
+        // this.metadataURL = model_url + "metadata.json";
         this.interval = null
         
     }
