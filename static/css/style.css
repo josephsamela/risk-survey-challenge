@@ -9,7 +9,6 @@
   src: url('../font/sans-regular.woff2');
 }
 
-
 .hidden {
     display: none !important;
 }
@@ -25,7 +24,7 @@ body {
     -khtml-user-select: none; /* Konqueror HTML */
     -moz-user-select: none; /* Old versions of Firefox */
     -ms-user-select: none; /* Internet Explorer/Edge */
-    user-select: none; 
+    user-select: none;
 }
 
 h1 {
