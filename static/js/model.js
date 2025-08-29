@@ -42,6 +42,10 @@ export class Queue {
         var maxProbability = 0
         var maxPrediction = null
 
+        if (!predictions) {
+            return
+        }
+
         predictions.forEach(p => {
             if (p.probability > maxProbability) {
                 maxProbability = p.probability
