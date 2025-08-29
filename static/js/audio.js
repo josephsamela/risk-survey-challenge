@@ -1,10 +1,3 @@
-// export var countdown = new Audio('static/audio/countdown.mp4');
-// export var game = new Audio('static/audio/game.mp3');
-// export var win = new Audio('static/audio/win.mp4');
-// export var button = new Audio('static/audio/button.mp3');
-// export var found = new Audio('static/audio/foundit.mp4');
-
-
 
 export class Sound {
     constructor() {
@@ -13,6 +6,10 @@ export class Sound {
         this.win = new Audio('static/audio/win.mp4');
         this.button = new Audio('static/audio/button.mp3');
         this.found = new Audio('static/audio/found.mp3');
+        this.capture_open = new Audio('static/audio/capture_open.mp3');
+        this.capture_close = new Audio('static/audio/capture_close.mp3');
+        this.shutter = new Audio('static/audio/shutter.mp3');
+
         this.reset()
     }
     reset() {
@@ -45,6 +42,15 @@ export class Sound {
                 break;
             case 'found':
                 this.found.play()
+                break;
+            case 'capture_open':
+                this.capture_open.play()
+                break;
+            case 'capture_close':
+                this.capture_close.play()
+                break;
+            case 'shutter':
+                this.shutter.play()
                 break;
         
         }

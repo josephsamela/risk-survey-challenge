@@ -30,10 +30,10 @@ class Game {
         )
 
         this.foundItems = new Set()
-        this.gallery = []
         this.interval_game = null
         this.detectionQueue = new model.Queue(10)
-        this.detectionTimeout = Date.now()
+        this.captureOpen = false
+        this.collectionLogBuilt = false
     }
     
     callbackStart() {
@@ -52,7 +52,6 @@ class Game {
         ui.resetLogo()
 
         this.score = 0
-        this.gallery = []
         selectors.view_finish_gallery.innerHTML = ''
         this.detectionQueue.empty()
         this.foundItems.clear()
@@ -74,15 +73,40 @@ class Game {
         this.sound.play('countdown')
 
     }
+
+    buildCollectionLog() {
+        selectors.view_game_drawer_toolbar_score_text.innerText = `${this.foundItems.size}/${this.ai.labels.size}`
+
+        for (let label of this.ai.labels) {
+            var item = document.createElement('div')
+            var placeholder = document.createElement('div')
+            var title = document.createElement('p')
+
+            title.innerText = label
+
+            item.classList.add('view_game_drawer_log_gallery_item')
+            item.classList.add('not_collected')
+            item.id = `view_game_drawer_log_gallery_item_${label}`
+            item.appendChild(placeholder)
+            item.appendChild(title)
+
+            selectors.view_game_drawer_log_gallery.appendChild(item)
+        }
+
+        this.collectionLogBuilt = true
+    }
+
     callbackGame() {
         this.screen.show(this.view_game)
         window.scrollTo(0, document.body.scrollHeight);
 
-        this.sound.play('game')
-
         this.interval_game = setInterval(()=> {
 
             this.detectionQueue.add(this.ai.current_predictions)
+
+            if (!this.collectionLogBuilt & this.ai.hasOwnProperty('labels')) {
+                this.buildCollectionLog()
+            }
 
             // A detection is successful when...
             //  1. All detections in the queue agree
@@ -90,40 +114,68 @@ class Game {
             if (
                 result.detectionResult
             ) {
-                // When an item is detected, write the name to the UI
-                selectors.view_game_discover_capture.classList.add('view_game_discover_capture_detection')
-                selectors.view_game_discover_capture_title.innerText = result.detectedItem
-                selectors.view_game_discover_capture_subtitle.innerText = 'FOUND'
-
-                this.sound.play('found')
-
-                // If the item has not be detected before...
-                // if (!this.foundItems.has(result.detectedItem) & Date.now() > this.detectionTimeout) {
-
-                //     // Celebrate with audio, add to foundItems and update score
-                //     this.foundItems.add(result.detectedItem)
-                //     selectors.view_game_score.innerText = this.foundItems.size
-                //     this.detectionTimeout = Date.now() + 2000
-
-                //     var canvas = document.createElement("canvas");
-                //     canvas.width = 480;
-                //     canvas.height = 480;
-                //     canvas.getContext('2d').drawImage(selectors.view_game_video, 0, 0, 480, 480);
-
-                //     this.gallery.push(canvas)
-
-                // }
-
+                if (!this.captureOpen) {
+                    selectors.view_game_discover_capture.classList.add('view_game_discover_capture_detection')
+                    this.sound.play('capture_open')
+                    selectors.view_game_discover_capture_title.innerText = result.detectedItem
+                    selectors.view_game_discover_capture_subtitle.innerText = 'FOUND'
+                    this.captureOpen = true
+                }
             } else {
-                // If no item is detected, write ... to UI
-                selectors.view_game_discover_capture.classList.remove('view_game_discover_capture_detection')
-                selectors.view_game_discover_capture_title.innerText = '...'
-                selectors.view_game_discover_capture_subtitle.innerText = 'SEARCHING'
+
+                if (this.captureOpen) {
+                    selectors.view_game_discover_capture.classList.remove('view_game_discover_capture_detection')
+                    this.sound.play('capture_close')
+                    selectors.view_game_discover_capture_title.innerText = '...'
+                    selectors.view_game_discover_capture_subtitle.innerText = 'SEARCHING'
+                    this.captureOpen = false
+                }
             }
 
         }, 100)
 
     }
+
+    callbackCapture() {
+        this.sound.play('shutter')
+
+        var result = this.detectionQueue.found(this.detectionQueue)
+
+        // Add image to collection log
+        var canvas = document.createElement("canvas");
+        canvas.width = 480;
+        canvas.height = 480;
+        canvas.getContext('2d').drawImage(selectors.view_game_discover_camera, 0, 0, 480, 480);
+
+        var text = document.createElement('p')
+        text.innerText = result.detectedItem
+
+        var item = document.getElementById(`view_game_drawer_log_gallery_item_${result.detectedItem}`)
+
+        item.innerHTML = ''
+        item.classList.remove('not_collected')
+        item.appendChild(canvas)
+        item.appendChild(text)
+
+        // If the item has not be detected before...
+        if (!this.foundItems.has(result.detectedItem)) {
+
+            this.sound.play('found')
+
+            // Celebrate with audio, add to foundItems and update score
+            this.foundItems.add(result.detectedItem)
+            selectors.view_game_drawer_toolbar_score_text.innerText = `${this.foundItems.size}/${this.ai.labels.size}`
+
+            // If all items are found...
+            if (this.foundItems.size == this.ai.labels.size) {
+                this.sound.play('win')
+            }
+
+
+        }
+
+    }
+
     viewFinish() {
         this.sound.play('win')
 
@@ -156,3 +208,4 @@ class Game {
 var game = new Game()
 
 selectors.view_start_button.addEventListener("click", game.callbackStart.bind(game));
+selectors.view_game_discover_capture_button.addEventListener("click", game.callbackCapture.bind(game));

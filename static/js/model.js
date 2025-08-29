@@ -15,7 +15,10 @@ export class Model {
         }
 
         if (!t.hasOwnProperty('labels')) {
-            t.labels = t.model._metadata.labels
+            t.labels = new Set(t.model._metadata.labels)
+  
+            t.labels.delete('Nothing')
+            t.labels.delete('Background')
         }
 
         tf.tidy( ()=> {
