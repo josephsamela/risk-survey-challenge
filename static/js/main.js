@@ -95,23 +95,24 @@ class Game {
                 selectors.view_game_discover_capture_title.innerText = result.detectedItem
                 selectors.view_game_discover_capture_subtitle.innerText = 'FOUND'
 
+                this.sound.play('found')
+
                 // If the item has not be detected before...
-                if (!this.foundItems.has(result.detectedItem) & Date.now() > this.detectionTimeout) {
+                // if (!this.foundItems.has(result.detectedItem) & Date.now() > this.detectionTimeout) {
 
-                    // Celebrate with audio, add to foundItems and update score
-                    this.sound.play('found')
-                    this.foundItems.add(result.detectedItem)
-                    selectors.view_game_score.innerText = this.foundItems.size
-                    this.detectionTimeout = Date.now() + 2000
+                //     // Celebrate with audio, add to foundItems and update score
+                //     this.foundItems.add(result.detectedItem)
+                //     selectors.view_game_score.innerText = this.foundItems.size
+                //     this.detectionTimeout = Date.now() + 2000
 
-                    var canvas = document.createElement("canvas");
-                    canvas.width = 480;
-                    canvas.height = 480;
-                    canvas.getContext('2d').drawImage(selectors.view_game_video, 0, 0, 480, 480);
+                //     var canvas = document.createElement("canvas");
+                //     canvas.width = 480;
+                //     canvas.height = 480;
+                //     canvas.getContext('2d').drawImage(selectors.view_game_video, 0, 0, 480, 480);
 
-                    this.gallery.push(canvas)
+                //     this.gallery.push(canvas)
 
-                }
+                // }
 
             } else {
                 // If no item is detected, write ... to UI
