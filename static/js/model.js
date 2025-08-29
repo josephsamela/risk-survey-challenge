@@ -1,38 +1,4 @@
 
-// export class Model {
-//     constructor(source, model) {
-//         this.source = source
-//         this.model = model
-//         this.current_predictions = []
-//         this.interval = null
-//     }
-//     predict(t) {
-
-//         tf.tidy( ()=> {
-
-//             t.model.load()
-//             .then(model => {
-//                 model.detect(
-//                     t.source
-//                 )
-//                 .then(predictions => {
-//                     t.current_predictions = []
-//                     predictions.forEach(p => {
-//                         t.current_predictions.push(p.class)
-//                     });
-//                 })
-//             })
-//         })
-
-//     }
-//     start() {
-//         this.interval = setInterval(this.predict, 1000, this)
-//     }
-//     stop() {
-//         clearInterval(this.interval)
-//     }
-// }
-
 export class Model {
     constructor(source, model_url) {
         this.source = source
@@ -46,6 +12,10 @@ export class Model {
 
         if (!t.hasOwnProperty('model')) {
             t.model = await tmImage.load(t.modelURL, t.metadataURL);
+        }
+
+        if (!t.hasOwnProperty('labels')) {
+            t.labels = t.model._metadata.labels
         }
 
         tf.tidy( ()=> {
@@ -84,14 +54,6 @@ export class Queue {
             this.array.shift()
         }
     }
-    // equal() {
-    //     if (new Set(this.array).size == 1) {
-    //         return true
-    //     } else {
-    //         return false
-    //     }
-    // }
-
     found() {
         var predictionClasses = new Set()
 
@@ -134,7 +96,6 @@ export class Queue {
         }
 
     }
-
     empty() {
         this.array = Array(this.size).fill(null)
     }

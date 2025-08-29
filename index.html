@@ -1,70 +1,111 @@
-<!DOCTYPE html>
+<html>
 
-<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="theme-color" content="#B5B9C4">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <link rel="stylesheet" type="text/css" href="static/css/style.css">
+</head>
 
-    <head>
-        <meta charset="UTF-8">
-        <meta name="theme-color" content="#75013f">
-        <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-        <link rel="stylesheet" type="text/css" href="static/css/style.css">
-    </head>
+<body>
+    <section id="view_start">
 
-    <body>
-        <div class="views">
-            <div id="view_start" class="view view_start">
-                <div class="modal center-screen">
-                    <img id="view_start_logo" class="logo" src="static/img/stag.gif?ignore=1">
-                    <h1>Risk Survey Challenge</h1>
-                    <p id="view_start_tagline">Locate safety technology in the real world using your camera.</p>
-                    <button id="view_start_button">START</button>
-                </div>
-            </div>
-            <div id="view_loading" class="view view_loading hidden">
-                <div class="modal center-screen">
-                    <h1>Instructions</h1>
-                    <p>Use your camera to find safety technology in the real world.<br><br>Find as many as you can in 30 sec!</p>
-                    <button id="view_loading_button">Next</button>
-                </div>
-            </div>
-            <div id="view_countdown" class="view view_countdown hidden">
-                <div class="modal center-screen">
-                    <h1 id="view_countdown_value">3</h1>
-                </div>
-            </div>
-            <div id="view_game" class="view view_game hidden">
-                <div id="view_game_toolbar" class="view_game_toolbar_top">
-                    <p id="view_game_item_status" class="item">SEARCHING</p>
-                    <h1 id="view_game_item" class="item">...</h1>
-                </div>
-                <video id="view_game_video" muted autoplay></video>
-                <div id="view_game_toolbar_bottom" class="modal screen-bottom">
-                    <div>
-                        <h1 id="view_game_timer">30</h1>
-                        <p>TIMER</p>
-                    </div>
-                    <div>
-                        <h1 id="view_game_score">0</h1>
-                        <p>SCORE</p>
-                    </div>
-                </div>
-            </div>
-            <div id="view_finish" class="view view_finish hidden">
-                <div class="modal center-screen">
-                    <h1>Result</h1>
-                    <p id="view_finish_message">You found 0 types of safety equipment.</p>
-                    <div id="view_finish_gallery" class="grid-container"></div>
-                    <button id="view_finish_button">TRY AGAIN?</button>
-                </div>
+        <h1>Risk Survey Challenge</h1>
+        <button id="view_start_button">START</button>
+
+    </section>
+    <section id="view_instructions" class="hidden"></section>
+    <section id="view_camera_permission" class="hidden"></section>
+    <section id="view_countdown" class="hidden"></section>
+    <section id="view_game" class="hidden">
+        <div id="view_game_discover">
+            <video id="view_game_discover_camera" muted autoplay></video>
+            <div id="view_game_discover_capture" class="view_game_discover_capture">
+                <p id="view_game_discover_capture_subtitle">SEARCHING</p>
+                <h1 id="view_game_discover_capture_title">...</h1>
+
+                <button id="view_game_discover_capture_button" class="view_game_drawer_toolbar_button">
+                    <img id="view_game_discover_capture_button_icon" draggable="false" src="static/img/cube.svg">
+                </button>
+                <p>CAPTURE</p>
             </div>
         </div>
-    </body>
+        <div id="view_game_drawer">
+            <button id="view_game_drawer_toolbar_button_log" class="view_game_drawer_toolbar_button">
+                <img id="view_game_drawer_toolbar_button_log_icon" draggable="false"
+                    class="view_game_drawer_toolbar_button_icon" src="static/img/clipboard.svg">
+                <h1>COLLECTION LOG</h1>
+            </button>
+            <div id="view_game_drawer_log">
+                <div id="view_game_drawer_log_gallery">
+                    <div class="gallery-item not_collected">
+                        <h1>1</h1>
+                        <p>Traffic Cone</p>
+                    </div>
+                    <div class="gallery-item not_collected">
+                        <h1>2</h1>
+                        <p>Traffic Cone</p>
+                    </div>
+                    <div class="gallery-item not_collected">
+                        <h1>3</h1>
+                        <p>Traffic Cone</p>
+                    </div>
+                    <div class="gallery-item not_collected">
+                        <h1>4</h1>
+                        <p>Traffic Cone</p>
+                    </div>
+                    <div class="gallery-item not_collected">
+                        <h1>5</h1>
+                        <p>Traffic Cone</p>
+                    </div>
+                    <div class="gallery-item not_collected">
+                        <h1>6</h1>
+                        <p>Traffic Cone</p>
+                    </div>
+                    <div class="gallery-item not_collected">
+                        <h1>7</h1>
+                        <p>Traffic Cone</p>
+                    </div>
+                    <div class="gallery-item not_collected">
+                        <h1>8</h1>
+                        <p>Traffic Cone</p>
+                    </div>
+                    <div class="gallery-item not_collected">
+                        <h1>9</h1>
+                        <p>Traffic Cone</p>
+                    </div>
+                    <div class="gallery-item not_collected">
+                        <h1>10</h1>
+                        <p>Traffic Cone</p>
+                    </div>
+                    <div class="gallery-item not_collected">
+                        <h1>11</h1>
+                        <p>Traffic Cone</p>
+                    </div>
+                    <div class="gallery-item not_collected">
+                        <h1>12</h1>
+                        <p>Traffic Cone</p>
+                    </div>
+                </div>
+            </div>
+            <div id="view_game_drawer_toolbar">
+                <button id="view_game_drawer_toolbar_button_score" class="view_game_drawer_toolbar_button">
+                    <img id="view_game_drawer_toolbar_button_score_icon" draggable="false"
+                        class="view_game_drawer_toolbar_button_icon" src="static/img/star.svg">
+                    <h1 id="view_game_drawer_toolbar_score_text">0/15</h1>
+                </button>
+                <button id="view_game_drawer_toolbar_button_timer" class="view_game_drawer_toolbar_button">
+                    <img id="view_game_drawer_toolbar_button_timer_icon" draggable="false"
+                        class="view_game_drawer_toolbar_button_icon" src="static/img/stopwatch.svg">
+                    <h1 id="view_game_drawer_toolbar_timer_text">15m 8s</h1>
+                </button>
+            </div>
+        </div>
+    </section>
+</body>
 
 </html>
 
 <script src="static/js/main.js" type="module"></script>
-<!-- <script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs@4.22.0"></script> -->
-<!-- <script src="https://cdn.jsdelivr.net/npm/@tensorflow-models/coco-ssd"></script> -->
-
 <script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs@latest/dist/tf.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/@teachablemachine/image@latest/dist/teachablemachine-image.min.js"></script>
- 

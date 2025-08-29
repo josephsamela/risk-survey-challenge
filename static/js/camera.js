@@ -10,7 +10,7 @@ export function start(){
             }
         )
         .then(function (stream) {
-            selectors.view_game_video.srcObject = stream;
+            selectors.view_game_discover_camera.srcObject = stream;
             return true
         })
         .catch(function (error) {
@@ -21,7 +21,7 @@ export function start(){
 }
 
 export function stop(){
-    selectors.view_game_video.srcObject.getTracks().forEach(function(track) {
+    selectors.view_game_discover_camera.srcObject.getTracks().forEach(function(track) {
         track.stop();
     });
 }

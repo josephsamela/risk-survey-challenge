@@ -1,23 +1,30 @@
 
 // VIEWS
 export var view_start = document.getElementById('view_start');
-export var view_loading = document.getElementById('view_loading');
 export var view_countdown = document.getElementById('view_countdown');
+export var view_instructions = document.getElementById('view_instructions');
+export var view_camera_permission = document.getElementById('view_camera_permission');
 export var view_game = document.getElementById('view_game');
-export var view_finish = document.getElementById('view_finish');
 
-// BUTTONS
+// START
+
+// INSTRUCTIONS
+
+// CAMERA PERMISSION
+
+// COUNTDOWN
+
+// GAME
+
+export var view_game_discover_capture = document.getElementById('view_game_discover_capture');
+export var view_game_discover_capture_button = document.getElementById('view_game_discover_capture_button');
+export var view_game_discover_capture_title = document.getElementById('view_game_discover_capture_title');
+export var view_game_discover_capture_subtitle = document.getElementById('view_game_discover_capture_subtitle');
+
+export var view_game_discover_camera = document.getElementById('view_game_discover_camera');
+
+export var view_game_drawer_log_gallery = document.getElementById('view_game_drawer_log_gallery');
+export var view_game_drawer_toolbar_score_text = document.getElementById('view_game_drawer_toolbar_score_text');
+export var view_game_drawer_toolbar_timer_text = document.getElementById('view_game_drawer_toolbar_timer_text');
+
 export var view_start_button = document.getElementById('view_start_button');
-export var view_loading_button = document.getElementById('view_loading_button');
-export var view_finish_button = document.getElementById('view_finish_button');
-
-// OBJECTS
-export var view_start_logo = document.getElementById('view_start_logo');
-export var view_countdown_value = document.getElementById('view_countdown_value');
-export var view_game_timer = document.getElementById('view_game_timer');
-export var view_game_score = document.getElementById('view_game_score');
-export var view_finish_message = document.getElementById('view_finish_message');
-export var view_finish_gallery = document.getElementById('view_finish_gallery');
-export var view_game_video = document.getElementById('view_game_video');
-export var view_game_item = document.getElementById('view_game_item');
-export var view_game_item_status = document.getElementById('view_game_item_status');

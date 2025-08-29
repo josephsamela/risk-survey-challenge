@@ -8,34 +8,42 @@ class Game {
     constructor() {
 
         this.view_start = new ui.View(selectors.view_start)
-        this.view_loading = new ui.View(selectors.view_loading)
+        this.view_instructions = new ui.View(selectors.view_instructions)
+        this.view_camera_permission = new ui.View(selectors.view_camera_permission)
         this.view_countdown = new ui.View(selectors.view_countdown)
         this.view_game = new ui.View(selectors.view_game)
-        this.view_finish = new ui.View(selectors.view_finish)
 
         this.views = [
             this.view_start,
-            this.view_loading,
+            this.view_instructions,
+            this.view_camera_permission,
             this.view_countdown,
-            this.view_game,
-            this.view_finish
+            this.view_game
         ]
 
         this.screen = new ui.ViewController(this.views)
         // this.ai = new model.Model(selectors.view_game_video, cocoSsd)
 
         this.ai = new model.Model(
-            selectors.view_game_video, 
+            selectors.view_game_discover_camera, 
             'https://teachablemachine.withgoogle.com/models/PHngkbAAu/'
         )
 
         this.foundItems = new Set()
         this.gallery = []
         this.interval_game = null
-        this.detectionQueue = new model.Queue(5)
+        this.detectionQueue = new model.Queue(10)
         this.detectionTimeout = Date.now()
     }
     
+    callbackStart() {
+        this.sound = new audio.Sound()
+        this.sound.play('button')
+        var camera_permission = camera.start()
+        this.ai.start()
+        this.callbackGame()
+    }
+
     viewStart() {
         this.sound.play('button')
 
@@ -66,29 +74,26 @@ class Game {
         this.sound.play('countdown')
 
     }
-    viewGame() {
+    callbackGame() {
         this.screen.show(this.view_game)
-        new ui.Countdown(selectors.view_game_timer, 30, '0', this.viewFinish, this)
+        window.scrollTo(0, document.body.scrollHeight);
+
         this.sound.play('game')
-
-
-        selectors.view_game_score.innerText = this.foundItems.size
-        selectors.view_game_item_status.innerText = 'SEARCHING'
-        selectors.view_game_item.innerText = '...'
 
         this.interval_game = setInterval(()=> {
 
             this.detectionQueue.add(this.ai.current_predictions)
 
             // A detection is successful when...
-            //  1. All detections in the queue agree (avoid one-off mistakes)
+            //  1. All detections in the queue agree
             var result = this.detectionQueue.found(this.detectionQueue)
             if (
                 result.detectionResult
             ) {
                 // When an item is detected, write the name to the UI
-                selectors.view_game_item_status.innerText = 'FOUND'
-                selectors.view_game_item.innerText = result.detectedItem
+                selectors.view_game_discover_capture.classList.add('view_game_discover_capture_detection')
+                selectors.view_game_discover_capture_title.innerText = result.detectedItem
+                selectors.view_game_discover_capture_subtitle.innerText = 'FOUND'
 
                 // If the item has not be detected before...
                 if (!this.foundItems.has(result.detectedItem) & Date.now() > this.detectionTimeout) {
@@ -110,8 +115,9 @@ class Game {
 
             } else {
                 // If no item is detected, write ... to UI
-                selectors.view_game_item_status.innerText = 'SEARCHING'
-                selectors.view_game_item.innerText = '...'
+                selectors.view_game_discover_capture.classList.remove('view_game_discover_capture_detection')
+                selectors.view_game_discover_capture_title.innerText = '...'
+                selectors.view_game_discover_capture_subtitle.innerText = 'SEARCHING'
             }
 
         }, 100)
@@ -148,6 +154,4 @@ class Game {
 
 var game = new Game()
 
-selectors.view_start_button.addEventListener("click", game.viewLoading.bind(game), false);
-selectors.view_loading_button.addEventListener("click", game.viewCountdown.bind(game), false);
-selectors.view_finish_button.addEventListener("click", game.viewStart.bind(game), false);
+selectors.view_start_button.addEventListener("click", game.callbackStart.bind(game));
