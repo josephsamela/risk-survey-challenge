@@ -28,3 +28,4 @@ export var view_game_drawer_toolbar_score_text = document.getElementById('view_g
 export var view_game_drawer_toolbar_timer_text = document.getElementById('view_game_drawer_toolbar_timer_text');
 
 export var view_start_button = document.getElementById('view_start_button');
+export var view_countdown_value = document.getElementById('view_countdown_value');

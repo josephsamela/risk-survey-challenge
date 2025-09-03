@@ -58,3 +58,28 @@ export class ViewController {
 export function resetLogo(){
     selectors.view_start_logo.src = selectors.view_start_logo.src
 }
+
+export function haptic() {
+  try {
+    if (navigator.vibrate) {
+      navigator.vibrate(50)
+      return
+    }
+
+    const labelEl = document.createElement('label')
+    labelEl.ariaHidden = 'true'
+    labelEl.style.display = 'none'
+
+    const inputEl = document.createElement('input')
+    inputEl.type = 'checkbox'
+    inputEl.setAttribute('switch', '')
+    labelEl.appendChild(inputEl)
+
+    document.head.appendChild(labelEl)
+    labelEl.click()
+    document.head.removeChild(labelEl)
+  }
+  catch {
+    // do nothing
+  }
+};

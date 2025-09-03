@@ -65,11 +65,56 @@ button {
     height: 100vh;
     flex-direction: column;
     text-align: center;
+    transform: translateY(-2em);
+
+    img {
+        max-width: 300px;
+    }
+
+    h1 {
+        font-size: 2em;
+        margin-bottom: 0.5em;
+    }
+
+    button {
+        background-color: #DE2931;
+        aspect-ratio: 1;
+        padding: 0px;
+        border-radius: 5em;
+        padding: 8px;
+        border: 2px solid rgba(0, 0, 0, 0.20);
+        height: 49px;
+        display: inline-flex;
+        align-items: center;
+        grid-gap: 0.5em;
+        padding: 0px 2em;
+    }
+
+    p {
+        font-size: 2em;
+    }
+
 }
 
 /* VIEW INSTRUCTIONS */
 
 /* VIEW CAMERA PERMISSION */
+
+/* VIEW COUNTDOWN */
+
+#view_countdown {
+
+    display: flex;
+    align-items: center;
+    justify-items: center;
+    text-align: center;
+    height: 100vh;
+
+    h1 {
+        font-size: 6em;
+    }
+
+}
 
 /* VIEW GAME */
 
@@ -159,7 +204,7 @@ button {
 #view_game_drawer_log_gallery {
     display: flex;
     flex-wrap: wrap;
-    gap: 2em 1em;
+    gap: 1em;
     max-height: -webkit-fill-available;
     width: 100%;
     max-width: 800px;
@@ -167,24 +212,23 @@ button {
     justify-content: center;
 }
 
-.view_game_drawer_log_gallery_item {
-    height: 100px;
-    width: 100px;
-}
-
 .view_game_drawer_log_gallery_item canvas {
-    height: 100%;
     border-radius: 1em;
+    width: 100px;
+    border: solid transparent 3px;
+    user-select: contain;
 }
 
 .view_game_drawer_log_gallery_item div {
     aspect-ratio: 1;
     border: dashed black 3px;
     border-radius: 1em;
+    width: 100px;
 }
 
 .view_game_drawer_log_gallery_item p {
     margin-top: 6px;
+    font-size: 14px;
 }
 
 .view_game_drawer_log_gallery_item.not_collected {

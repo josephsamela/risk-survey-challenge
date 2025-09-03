@@ -85,7 +85,7 @@ export class Queue {
 
         var detectedItem = [...predictionClasses][0]
 
-        if (predictionClasses.size == 1 & detectedItem != 'Nothing') {
+        if (predictionClasses.size == 1 & detectedItem != 'Nothing' & detectedItem != 'Background') {
 
             return {
                 detectionResult: true,

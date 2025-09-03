@@ -26,7 +26,7 @@ class Game {
 
         this.ai = new model.Model(
             selectors.view_game_discover_camera, 
-            'https://teachablemachine.withgoogle.com/models/PHngkbAAu/'
+            './static/model/'
         )
 
         this.foundItems = new Set()
@@ -39,39 +39,32 @@ class Game {
     callbackStart() {
         this.sound = new audio.Sound()
         this.sound.play('button')
-        var camera_permission = camera.start()
+        ui.haptic()
         this.ai.start()
-        this.callbackGame()
+        // this.viewCountdown()
+        this.viewCameraPermission()
     }
 
-    viewStart() {
-        this.sound.play('button')
-
-        this.screen.show(this.view_start)
-
-        ui.resetLogo()
-
-        this.score = 0
-        selectors.view_finish_gallery.innerHTML = ''
-        this.detectionQueue.empty()
-        this.foundItems.clear()
-        this.sound.reset()
+    viewCameraPermission() {
+        this.screen.show(this.view_camera_permission)
+        var camera_permission = camera.start()
+        var checkCameraPermissionInterval = setInterval(()=>{
+            navigator.permissions.query({name: 'camera'})
+            .then((result) => {
+                if (result.state == 'granted') {
+                    clearInterval(checkCameraPermissionInterval)
+                    this.viewCountdown()
+                }
+            })
+        }, 100)
     }
-    viewLoading() {
-        this.sound = new audio.Sound()
 
-        this.sound.play('button')
-
-        this.screen.show(this.view_loading)
-        var camera_permission = camera.start();
-    }
     viewCountdown() {
         this.sound.play('button')
         this.screen.show(this.view_countdown)
-        new ui.Countdown(selectors.view_countdown_value, 3, 'GO!', this.viewGame, this)
+        new ui.Countdown(selectors.view_countdown_value, 3, 'GO!', this.callbackGame, this)
         this.ai.start()
         this.sound.play('countdown')
-
     }
 
     buildCollectionLog() {
@@ -100,6 +93,8 @@ class Game {
         this.screen.show(this.view_game)
         window.scrollTo(0, document.body.scrollHeight);
 
+        // this.sound.play('game')
+
         this.interval_game = setInterval(()=> {
 
             this.detectionQueue.add(this.ai.current_predictions)
@@ -117,6 +112,7 @@ class Game {
                 if (!this.captureOpen) {
                     selectors.view_game_discover_capture.classList.add('view_game_discover_capture_detection')
                     this.sound.play('capture_open')
+                    ui.haptic()
                     selectors.view_game_discover_capture_title.innerText = result.detectedItem
                     selectors.view_game_discover_capture_subtitle.innerText = 'FOUND'
                     this.captureOpen = true
@@ -126,6 +122,7 @@ class Game {
                 if (this.captureOpen) {
                     selectors.view_game_discover_capture.classList.remove('view_game_discover_capture_detection')
                     this.sound.play('capture_close')
+                    ui.haptic()
                     selectors.view_game_discover_capture_title.innerText = '...'
                     selectors.view_game_discover_capture_subtitle.innerText = 'SEARCHING'
                     this.captureOpen = false

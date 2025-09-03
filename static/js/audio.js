@@ -10,6 +10,8 @@ export class Sound {
         this.capture_close = new Audio('static/audio/capture_close.mp3');
         this.shutter = new Audio('static/audio/shutter.mp3');
 
+        this.game.loop = true
+
         this.reset()
     }
     reset() {

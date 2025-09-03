@@ -2,19 +2,32 @@
 
 <head>
     <meta charset="UTF-8">
-    <meta name="theme-color" content="#B5B9C4">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <title>Risk Survey Challenge</title>
+
+    <link rel="manifest" href="manifest.json">
     <link rel="stylesheet" type="text/css" href="static/css/style.css">
+
+    <link rel="icon" type="image/x-icon" href="static/img/icon.png">
+    
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-title" content="Risk Survey Challenge">
+    <link rel="apple-touch-icon" href="static/img/icon.png">
+    
+    <meta name="theme-color" content="#B5B9C4">
 </head>
 
 <body>
     <section id="view_start">
+        <img src="static/img/icon.png">
         <h1>Risk Survey Challenge</h1>
-        <button id="view_start_button">START</button>
+        <button id="view_start_button"><p>START</p></button>
     </section>
     <section id="view_instructions" class="hidden"></section>
     <section id="view_camera_permission" class="hidden"></section>
-    <section id="view_countdown" class="hidden"></section>
+    <section id="view_countdown" class="hidden">
+        <h1 id="view_countdown_value">3</h1>
+    </section>
     <section id="view_game" class="hidden">
         <div id="view_game_discover">
             <video id="view_game_discover_camera" muted autoplay></video>
