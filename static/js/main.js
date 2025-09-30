@@ -23,6 +23,7 @@ class Game {
 
         this.screen = new ui.ViewController(this.views)
         // this.ai = new model.Model(selectors.view_game_video, cocoSsd)
+        // this.ai = new model.TFModel(selectors.view_game_discover_camera)
 
         this.ai = new model.Model(
             selectors.view_game_discover_camera, 
