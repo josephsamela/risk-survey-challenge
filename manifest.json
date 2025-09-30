@@ -1,7 +1,7 @@
 {
     "name": "Risk Survey Challenge",
     "short_name": "Risk Survey Challenge",
-    "start_url": "/",
+    "start_url": "https://samela.io/risk-survey-challenge",
     "display": "standalone",
     "orientation": "portrait",
     "theme_color": "#B5B9C4",
