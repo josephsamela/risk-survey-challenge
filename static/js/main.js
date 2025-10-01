@@ -94,6 +94,7 @@ class Game {
         this.screen.show(this.view_game)
         window.scrollTo(0, document.body.scrollHeight);
 
+        var camera_permission = camera.start()
         // this.sound.play('game')
 
         this.interval_game = setInterval(()=> {
