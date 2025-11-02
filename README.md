@@ -2,7 +2,7 @@
 
 Use your camera to discover safety technology in the real world!
 
-![](/docs/screenshots.png)
+[![](/docs/thumbnail.jpg)](https://youtu.be/e5IlHXornak?si=adzmBQd4Ayfg9-4h)
 
 ## About
 
@@ -51,3 +51,7 @@ In the app, swipe down to access the *Collection Log*. Discover an item with you
 | 10 | Water Sensor      | <img src="docs/water_sensor.jpg" width="200px">      |
 | 11 | Work Boots        | <img src="docs/work_boots.jpg" width="200px">        |
 | 12 | Work Gloves       | <img src="docs/work_gloves.jpg" width="200px">       |
+
+## Screenshots
+
+![](/docs/screenshots.png)
