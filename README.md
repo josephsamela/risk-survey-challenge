@@ -2,6 +2,8 @@
 
 Use your camera to discover safety technology in the real world!
 
+![](/docs/screenshots.png)
+
 ## About
 
 The **Risk Survey Challenge** is a digital scavenger hunt where players use their phone camera to discover safety technology in the real world. When players discover an item, they can use the capture button to add it to their collection log. Discover all 12 types of safety technology to finish the collection log and complete the challenge!
@@ -33,7 +35,7 @@ This app is available as a Progressive Web App (PWA). Add to Home Screen for the
 In the app, swipe down to access the *Collection Log*. Discover an item with your camera and use the capture button to add it to your collection log. Discover all 12 types of safety technology to complete the collection log!
 
 > [!NOTE]
-> The computer vision component of this app uses a custom object recognition model developed specifically for this app. The model runs in the browser with [tensorflow.js](https://www.tensorflow.org/js). The model has only been trained to identify these 12 items with images of these exact items as training data. This means, it may not correctly recognize other versions of these items that are visually different.
+> The computer vision object recognition model was trained specifically for this app. The model runs in browser using [tensorflow.js](https://www.tensorflow.org/js). The model has been trained to identify 12 safety-related items. Images of the exact items pictured below were used as training data. This means, the model may not correctly recognize other versions of these items that are visually different.
 
 | #  | Item              | Example                                              |
 |----|-------------------|------------------------------------------------------|
